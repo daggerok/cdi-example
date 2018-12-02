@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>cdi-example (0.0.1)</title>
-<date>2018-12-02 23:42:33 UTC</date>
+<date>2018-12-02 23:49:33 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,7 +15,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.1</revnumber>
-<date>2018-12-02 23:42:33 UTC</date>
+<date>2018-12-02 23:49:33 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -51,7 +51,11 @@
 </itemizedlist>
 <programlisting language="java" linenumbering="unnumbered">public class App {
   public static void main(String[] args) {
-    SeContainer container = SeContainerInitializer.newInstance().initialize();
+    SeContainer container = SeContainerInitializer.newInstance()
+                                                  .setClassLoader(App.class.getClassLoader())
+                                                  .addPackages(App.class,
+                                                               BeanManager.class)
+                                                  .initialize();
     // happy hacking!
   }
 }</programlisting>
@@ -60,11 +64,11 @@
 <simpara>build, run abd test</simpara>
 </listitem>
 </itemizedlist>
-<programlisting language="bash" linenumbering="unnumbered"># maven jar
+<programlisting language="bash" linenumbering="unnumbered"># jar
 ./mvnw clean package
 java -jar target/*-all.jar
 
-# maven docker / docker-compose
+# docker
 ./mvnw docker-compose:up -P docker
 ./mvnw docker-compose:down -P docker</programlisting>
 </chapter>
