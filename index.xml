@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc maxdepth="4"?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>cdi-example (0.0.1)</title>
+<date>2018-12-02 23:42:33 UTC</date>
+<author>
+<personname>
+<firstname>Maksim</firstname>
+<surname>Kostromin</surname>
+</personname>
+<email>daggerok@gmail.com</email>
+</author>
+<authorinitials>MK</authorinitials>
+<revhistory>
+<revision>
+<revnumber>0.0.1</revnumber>
+<date>2018-12-02 23:42:33 UTC</date>
+<authorinitials>MK</authorinitials>
+</revision>
+</revhistory>
+</info>
+<chapter xml:id="introduction">
+<title>Introduction</title>
+<simpara>Maven java main CDI example</simpara>
+<simpara>Read <link xl:href="https://daggerok.github.io/cdi-example">project reference documentation</link></simpara>
+<itemizedlist>
+<listitem>
+<simpara>add proper dependencies</simpara>
+</listitem>
+</itemizedlist>
+<programlisting language="xml" linenumbering="unnumbered">    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss.weld.se&lt;/groupId&gt;
+      &lt;artifactId&gt;weld-se-core&lt;/artifactId&gt;
+      &lt;version&gt;3.0.5.Final&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;javax.enterprise&lt;/groupId&gt;
+      &lt;artifactId&gt;cdi-api&lt;/artifactId&gt;
+      &lt;version&gt;2.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+      &lt;groupId&gt;org.jboss&lt;/groupId&gt;
+      &lt;artifactId&gt;jandex&lt;/artifactId&gt;
+      &lt;version&gt;2.0.5.Final&lt;/version&gt;
+    &lt;/dependency&gt;</programlisting>
+<itemizedlist>
+<listitem>
+<simpara>add minial required bootstrap configuration</simpara>
+</listitem>
+</itemizedlist>
+<programlisting language="java" linenumbering="unnumbered">public class App {
+  public static void main(String[] args) {
+    SeContainer container = SeContainerInitializer.newInstance().initialize();
+    // happy hacking!
+  }
+}</programlisting>
+<itemizedlist>
+<listitem>
+<simpara>build, run abd test</simpara>
+</listitem>
+</itemizedlist>
+<programlisting language="bash" linenumbering="unnumbered"># maven jar
+./mvnw clean package
+java -jar target/*-all.jar
+
+# maven docker / docker-compose
+./mvnw docker-compose:up -P docker
+./mvnw docker-compose:down -P docker</programlisting>
+</chapter>
+<chapter xml:id="implementation">
+<title>Implementation</title>
+<simpara>TODO: implement documentation&#8230;&#8203;</simpara>
+</chapter>
+<chapter xml:id="links">
+<title>Links</title>
+<itemizedlist>
+<listitem>
+<simpara><link xl:href="https://github.com/daggerok/cdi-example">GitHub repo</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://daggerok.github.io/cdi-example">GitHub pages</link></simpara>
+</listitem>
+</itemizedlist>
+</chapter>
+</book>
