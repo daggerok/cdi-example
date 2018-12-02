@@ -6,16 +6,52 @@ Maven java main CDI example
 
 Read link:https://daggerok.github.io/cdi-example[project reference documentation]
 
-.build
+- add proper dependencies
+
+[source,xml]
+----
+    <dependency>
+      <groupId>org.jboss.weld.se</groupId>
+      <artifactId>weld-se-core</artifactId>
+      <version>3.0.5.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jandex</artifactId>
+      <version>2.0.5.Final</version>
+    </dependency>
+----
+
+- add minial required bootstrap configuration
+
+[source,java]
+----
+public class App {
+  public static void main(String[] args) {
+    SeContainer container = SeContainerInitializer.newInstance()
+                                                  .setClassLoader(App.class.getClassLoader())
+                                                  .addPackages(App.class,
+                                                               BeanManager.class)
+                                                  .initialize();
+    // happy hacking!
+  }
+}
+----
+
+- build, run abd test
+
 [source,bash]
 ----
-# maven jar
-./mvnw clean package
-java -jar target/*-all.jar
+# jar
+./mvnw ; java -jar target/*-all.jar
 
-# maven docker / docker-compose
-./mvnw docker-compose:up -P docker
-./mvnw docker-compose:down -P docker
+# docker
+./mvnw ; ./mvnw docker-compose:up -P docker
 ----
 
 //end::content[]

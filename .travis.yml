@@ -4,6 +4,7 @@ notifications:
 env:
   global:
   - TERM=dumb
+  - secure: GYdn2pmeMnvZM5Zwj1AYRlBsFq1cAvFG2KcdB3sman9pvx+n/o8Rt0I0wfpLpxVmjaAX/utzfDHHNjB5mP0Lf5yS4sofZ4hW+I5EOmHQ/8VUxQQCX1kgfkpwwBQRJnl3/7xevfd20PikViyjya+t/BiGCFFQGqDskhosI5dHAKU0H4ofOZObTIsmEhOYR5pYx0wfqJ2NSUtsQzAThaWwGsB+MnhmjGLSbeNul/JLLYbGQoXxpTj8jAxXvKRBXBIsTioghBFcKstybbxVzXuMJ/wrE/QD86vulF7QhNYcryjU53m1BDmF4PTKkKUM3GjMy2d/OSG7Vw+mBtof5tP5RjwSQNsS87mEep8oZYG0KVP1GMT85vJFvqtrasyXPOYWS6ZqQBPiSKdstYcPaXAM/h7zhSwkmrfrQHaUc2VM8guY8ARZmmSM/JUJYE/VUYrAYlssbn/0GwR298zzWhO/84CjhKBUL4yb4boLZRRU20hMo6Od0M0XmEa9wzeNGIUfEEVqBW9yijz3UCBMcMUgmLWHSKr1B23/LnlOl47e6CMGmUfwVYc/mFM33fdcewNiqw/sjbT6TUD3g04fmAbdOfMbmkp3Ksy1PIVzOfA3Vg/sS/ylWjRLsECDASmVCMgEETsvyqXKy6tZMFxtckX664vxksyU2MdhR4CGGuGMXeM=
 
 language: java
 jdk:
@@ -15,12 +16,7 @@ service:
 
 addons:
   apt:
-    sources:
-    - google-chrome
     packages:
-    - google-chrome-stable
-    - libappindicator1
-    - fonts-liberation
     - bash
     - curl
     - libxml2-utils
@@ -28,62 +24,25 @@ addons:
 
 install: true
 before_install:
-- export CHROME_BIN=/usr/bin/google-chrome
-- export DISPLAY=:99.0
-- sh -e /etc/init.d/xvfb start
-#
-- sudo add-apt-repository universe -y >/dev/null
-- echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list >/dev/null
 - sudo apt-get update -yqq >/dev/null
 - sudo apt-get install -yqq --no-install-suggests --no-install-recommends
   tree jq python-pip curl bash sudo >/dev/null
-#
 - sudo pip install docker-compose httpie >/dev/null 2>&1
-#
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 - stop_any 8080 3000 80 >/dev/null
-#
-- curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - >/dev/null
-- echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list >/dev/null
-- sudo apt-get update -yqq >/dev/null
-- sudo apt-get install -yqq --no-install-suggests --no-install-recommends yarn >/dev/null
-
 script:
 - export root=$(pwd)
-#
-- bash gradlew >/dev/null
-- java -jar ./build/libs/*-all.jar
-#
-- bash gradlew clean installDist >/dev/null
-- bash ./build/install/cdi-example/bin/cdi-example
-#
-- bash gradlew clean distZip >/dev/null
-- unzip -o ./build/distributions/cdi-example-0.0.1.zip -d /tmp
-- bash /tmp/cdi-example-0.0.1/bin/cdi-example
-#
-- bash gradlew clean build composeUp
-- bash gradlew composeDown
-#
 - bash mvnw clean package >/dev/null
 - java -jar target/*-all.jar
-#
-- bash mvnw docker-compose:up -P docker
-- bash mvnw docker-compose:down -P docker
-
-before_cache:
-- for item in $(find ~/.gradle -name "*.lock");
-    do sudo rm -rf $item ;
-  done
+- ./mvnw ; ./mvnw docker-compose:up -P docker
 
 cache:
   directories:
   - $HOME/.m2
-  - $HOME/.gradle
   - $HOME/.docker
 
 before_deploy:
 - cd ${root}
-#- ./gradlew documentation -Dorg.gradle.jvmargs='-Xmx1g'
 - ./mvnw -Pdocs
 - mkdir -p ./target/generated-docs
 - cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
