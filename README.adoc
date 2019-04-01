@@ -67,6 +67,13 @@ public class App {
 java -jar target/*-all.jar
 ----
 
+.interceptors
+[source, bash]
+----
+./mvnw -Pinterceptors
+java -jar target/*-all.jar
+----
+
 .qualifiers
 [source, bash]
 ----
@@ -89,6 +96,7 @@ java -jar target/*-all.jar
 links:
 
 - link:https://eclipse-ee4j.github.io/jakartaee-tutorial/toc.html[Learn more from JakartaEE tutorials]
+- link:https://docs.jboss.org/weld/reference/latest/en-US/html/interceptors.html[JBoss weld reference]
 
 //end::links[]
 

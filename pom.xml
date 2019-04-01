@@ -188,6 +188,25 @@
 
   <profiles>
     <profile>
+      <id>interceptors</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <archive>
+                <manifest>
+                  <mainClass>daggerok.interceptors.Config</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
       <id>qualifiers</id>
 
       <build>
