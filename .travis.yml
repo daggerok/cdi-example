@@ -36,6 +36,9 @@ script:
   - ./mvnw -Pinterceptors
   - java -jar target/*-all.jar
   #
+  - ./mvnw -Plogs
+  - java -jar target/*-all.jar
+  #
   - ./mvnw -Pqualifiers
   - java -jar target/*-all.jar
 cache:

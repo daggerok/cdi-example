@@ -74,6 +74,13 @@ java -jar target/*-all.jar
 java -jar target/*-all.jar
 ----
 
+.logs
+[source, bash]
+----
+./mvnw -Plogs
+java -jar target/*-all.jar
+----
+
 .qualifiers
 [source, bash]
 ----

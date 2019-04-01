@@ -1,5 +1,6 @@
 package daggerok.interceptors.logging;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
 import javax.annotation.Priority;
@@ -11,14 +12,12 @@ import javax.interceptor.InvocationContext;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
+@Slf4j
 @Logged
 @Dependent
 @Interceptor
 @Priority(Interceptor.Priority.APPLICATION)
 public class LoggedInterceptor {
-
-  @Inject
-  Logger log;
 
   //@javax.interceptor.AroundConstruct
   //@javax.annotation.PostConstruct
