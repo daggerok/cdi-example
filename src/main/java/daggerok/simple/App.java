@@ -1,4 +1,4 @@
-package daggerok;
+package daggerok.simple;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,6 +14,6 @@ public class App {
                                                   .addPackages(App.class,
                                                                BeanManager.class)
                                                   .initialize();
-    log.info("yo!");
+    log.info("simple! {}", container);
   }
 }

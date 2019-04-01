@@ -1,52 +1,48 @@
 notifications:
   email: false
-
 env:
   global:
-  - TERM=dumb
-  - secure: GYdn2pmeMnvZM5Zwj1AYRlBsFq1cAvFG2KcdB3sman9pvx+n/o8Rt0I0wfpLpxVmjaAX/utzfDHHNjB5mP0Lf5yS4sofZ4hW+I5EOmHQ/8VUxQQCX1kgfkpwwBQRJnl3/7xevfd20PikViyjya+t/BiGCFFQGqDskhosI5dHAKU0H4ofOZObTIsmEhOYR5pYx0wfqJ2NSUtsQzAThaWwGsB+MnhmjGLSbeNul/JLLYbGQoXxpTj8jAxXvKRBXBIsTioghBFcKstybbxVzXuMJ/wrE/QD86vulF7QhNYcryjU53m1BDmF4PTKkKUM3GjMy2d/OSG7Vw+mBtof5tP5RjwSQNsS87mEep8oZYG0KVP1GMT85vJFvqtrasyXPOYWS6ZqQBPiSKdstYcPaXAM/h7zhSwkmrfrQHaUc2VM8guY8ARZmmSM/JUJYE/VUYrAYlssbn/0GwR298zzWhO/84CjhKBUL4yb4boLZRRU20hMo6Od0M0XmEa9wzeNGIUfEEVqBW9yijz3UCBMcMUgmLWHSKr1B23/LnlOl47e6CMGmUfwVYc/mFM33fdcewNiqw/sjbT6TUD3g04fmAbdOfMbmkp3Ksy1PIVzOfA3Vg/sS/ylWjRLsECDASmVCMgEETsvyqXKy6tZMFxtckX664vxksyU2MdhR4CGGuGMXeM=
-
+    - TERM=dumb
+    - secure: GYdn2pmeMnvZM5Zwj1AYRlBsFq1cAvFG2KcdB3sman9pvx+n/o8Rt0I0wfpLpxVmjaAX/utzfDHHNjB5mP0Lf5yS4sofZ4hW+I5EOmHQ/8VUxQQCX1kgfkpwwBQRJnl3/7xevfd20PikViyjya+t/BiGCFFQGqDskhosI5dHAKU0H4ofOZObTIsmEhOYR5pYx0wfqJ2NSUtsQzAThaWwGsB+MnhmjGLSbeNul/JLLYbGQoXxpTj8jAxXvKRBXBIsTioghBFcKstybbxVzXuMJ/wrE/QD86vulF7QhNYcryjU53m1BDmF4PTKkKUM3GjMy2d/OSG7Vw+mBtof5tP5RjwSQNsS87mEep8oZYG0KVP1GMT85vJFvqtrasyXPOYWS6ZqQBPiSKdstYcPaXAM/h7zhSwkmrfrQHaUc2VM8guY8ARZmmSM/JUJYE/VUYrAYlssbn/0GwR298zzWhO/84CjhKBUL4yb4boLZRRU20hMo6Od0M0XmEa9wzeNGIUfEEVqBW9yijz3UCBMcMUgmLWHSKr1B23/LnlOl47e6CMGmUfwVYc/mFM33fdcewNiqw/sjbT6TUD3g04fmAbdOfMbmkp3Ksy1PIVzOfA3Vg/sS/ylWjRLsECDASmVCMgEETsvyqXKy6tZMFxtckX664vxksyU2MdhR4CGGuGMXeM=
 language: java
-jdk:
-- oraclejdk8
-#- oraclejdk10
-
+jdk: openjdk8
 service:
-- docker
-
+  - docker
 addons:
   apt:
     packages:
-    - bash
-    - curl
-    - libxml2-utils
-    - docker-ce
-
+      - jq
+      - bash
+      - curl
+      - sudo
+      - tree
+      - docker-ce
+      - python-pip
+      - libxml2-utils
 install: true
 before_install:
-- sudo apt-get update -yqq >/dev/null
-- sudo apt-get install -yqq --no-install-suggests --no-install-recommends
-  tree jq python-pip curl bash sudo >/dev/null
-- sudo pip install docker-compose httpie >/dev/null 2>&1
-- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
-- stop_any 8080 3000 80 >/dev/null
+  - sudo pip install docker-compose httpie >/dev/null 2>&1
+  - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+  - stop_any 80 8080 3000
 script:
-- export root=$(pwd)
-- bash mvnw clean package >/dev/null
-- java -jar target/*-all.jar
-- ./mvnw ; ./mvnw docker-compose:up -P docker
-
+  - export root=$(pwd)
+  - ./mvnw clean package >/dev/null
+  - java -jar target/*-all.jar
+  - ./mvnw ; ./mvnw docker-compose:up -P docker
+  #
+  - ./mvnw clean package -Pgetting-started
+  - java -jar target/*-all.jar
 cache:
+  packages: true
   directories:
-  - $HOME/.m2
-  - $HOME/.docker
-
+    - $HOME/.docker
+    - $HOME/.gradle
+    - $HOME/.m2
 before_deploy:
-- cd ${root}
-- ./mvnw -Pdocs
-- mkdir -p ./target/generated-docs
-- cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
-
+  - cd ${root}
+  - ./mvnw -Pdocs
+  - mkdir -p ./target/generated-docs
+  - cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
 deploy:
   provider: pages
   skip-cleanup: true
