@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>cdi-example (0.0.1)</title>
-<date>2018-12-02 23:56:31 UTC</date>
+<date>2019-04-01 00:07:56 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,13 +15,13 @@
 <revhistory>
 <revision>
 <revnumber>0.0.1</revnumber>
-<date>2018-12-02 23:56:31 UTC</date>
+<date>2019-04-01 00:07:56 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
 </info>
-<chapter xml:id="introduction">
-<title>Introduction</title>
+<chapter xml:id="intro">
+<title>Intro</title>
 <simpara>Maven java main CDI example</simpara>
 <simpara>Read <link xl:href="https://daggerok.github.io/cdi-example">project reference documentation</link></simpara>
 <itemizedlist>
@@ -70,13 +70,35 @@
 # docker
 ./mvnw ; ./mvnw docker-compose:up -P docker</programlisting>
 </chapter>
-<chapter xml:id="implementation">
-<title>Implementation</title>
-<simpara>TODO: implement documentation&#8230;&#8203;</simpara>
+<chapter xml:id="other">
+<title>Other</title>
+
+</chapter>
+<chapter xml:id="maven-profiles">
+<title>maven profiles</title>
+<formalpara>
+<title>default (simple)</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw
+./mvnw -Psimple
+java -jar target/*-all.jar</programlisting>
+</para>
+</formalpara>
+<formalpara>
+<title>getting-started</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pgetting-started
+java -jar target/*-all.jar</programlisting>
+</para>
+</formalpara>
 </chapter>
 <chapter xml:id="links">
 <title>Links</title>
+<simpara>links:</simpara>
 <itemizedlist>
+<listitem>
+<simpara><link xl:href="https://eclipse-ee4j.github.io/jakartaee-tutorial/toc.html">Learn more from JakartaEE tutorials</link></simpara>
+</listitem>
 <listitem>
 <simpara><link xl:href="https://github.com/daggerok/cdi-example">GitHub repo</link></simpara>
 </listitem>

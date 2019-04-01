@@ -468,20 +468,21 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2018-12-02 23:56:31 UTC</span>
+<span id="revdate">2019-04-01 00:07:56 UTC</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#implementation">Implementation</a></li>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#other">Other</a></li>
+<li><a href="#maven-profiles">maven profiles</a></li>
 <li><a href="#links">Links</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="introduction"><a class="anchor" href="#introduction"></a>Introduction</h2>
+<h2 id="intro"><a class="anchor" href="#intro"></a>Intro</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Maven java main CDI example</p>
@@ -555,18 +556,42 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="implementation"><a class="anchor" href="#implementation"></a>Implementation</h2>
+<h2 id="other"><a class="anchor" href="#other"></a>Other</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>TODO: implement documentation&#8230;&#8203;</p>
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="maven-profiles"><a class="anchor" href="#maven-profiles"></a>maven profiles</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="title">default (simple)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw
+./mvnw -Psimple
+java -jar target/*-all.jar</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">getting-started</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -Pgetting-started
+java -jar target/*-all.jar</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="links"><a class="anchor" href="#links"></a>Links</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>links:</p>
+</div>
 <div class="ulist">
 <ul>
+<li>
+<p><a href="https://eclipse-ee4j.github.io/jakartaee-tutorial/toc.html">Learn more from JakartaEE tutorials</a></p>
+</li>
 <li>
 <p><a href="./index.pdf">Documentation in PFD format</a></p>
 </li>
@@ -584,7 +609,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2018-12-02 23:56:31 UTC
+Last updated 2019-04-01 00:07:56 UTC
 </div>
 </div>
 <!-- jquery -->
