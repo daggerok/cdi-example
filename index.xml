@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>cdi-example (0.0.1)</title>
-<date>2019-04-01 00:07:56 UTC</date>
+<date>2019-04-01 00:31:14 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,7 +15,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.1</revnumber>
-<date>2019-04-01 00:07:56 UTC</date>
+<date>2019-04-01 00:31:14 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -77,17 +77,24 @@
 <chapter xml:id="maven-profiles">
 <title>maven profiles</title>
 <formalpara>
-<title>default (simple)</title>
+<title>getting-started</title>
 <para>
-<programlisting language="bash" linenumbering="unnumbered">./mvnw
-./mvnw -Psimple
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pgetting-started
 java -jar target/*-all.jar</programlisting>
 </para>
 </formalpara>
 <formalpara>
-<title>getting-started</title>
+<title>qualifiers</title>
 <para>
-<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pgetting-started
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pqualifiers
+java -jar target/*-all.jar</programlisting>
+</para>
+</formalpara>
+<formalpara>
+<title>default (simple)</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw
+./mvnw -Psimple
 java -jar target/*-all.jar</programlisting>
 </para>
 </formalpara>

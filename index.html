@@ -468,7 +468,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2019-04-01 00:07:56 UTC</span>
+<span id="revdate">2019-04-01 00:31:14 UTC</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -565,17 +565,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h2 id="maven-profiles"><a class="anchor" href="#maven-profiles"></a>maven profiles</h2>
 <div class="sectionbody">
 <div class="listingblock">
-<div class="title">default (simple)</div>
+<div class="title">getting-started</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw
-./mvnw -Psimple
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -Pgetting-started
 java -jar target/*-all.jar</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">getting-started</div>
+<div class="title">qualifiers</div>
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -Pgetting-started
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw -Pqualifiers
+java -jar target/*-all.jar</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">default (simple)</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">./mvnw
+./mvnw -Psimple
 java -jar target/*-all.jar</code></pre>
 </div>
 </div>
@@ -609,7 +616,7 @@ java -jar target/*-all.jar</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2019-04-01 00:07:56 UTC
+Last updated 2019-04-01 00:31:14 UTC
 </div>
 </div>
 <!-- jquery -->
