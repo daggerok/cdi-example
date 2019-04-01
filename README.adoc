@@ -60,18 +60,25 @@ public class App {
 
 == maven profiles
 
-.default (simple)
-[source,bash]
+.getting-started
+[source, bash]
 ----
-./mvnw
-./mvnw -Psimple
+./mvnw -Pgetting-started
 java -jar target/*-all.jar
 ----
 
-.getting-started
-[source,bash]
+.qualifiers
+[source, bash]
 ----
-./mvnw -Pgetting-started
+./mvnw -Pqualifiers
+java -jar target/*-all.jar
+----
+
+.default (simple)
+[source, bash]
+----
+./mvnw
+./mvnw -Psimple
 java -jar target/*-all.jar
 ----
 

@@ -32,6 +32,9 @@ script:
   #
   - ./mvnw clean package -Pgetting-started
   - java -jar target/*-all.jar
+  #
+  - ./mvnw -Pqualifiers
+  - java -jar target/*-all.jar
 cache:
   packages: true
   directories:
