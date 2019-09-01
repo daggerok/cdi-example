@@ -45,17 +45,30 @@ jobs:
   include:
 
   - stage: test
+    name: dependent
+    jdk: openjdk11
+    script:
+    - ./mvnw clean package -Passembly,dependent
+    - java -jar target/*-all.jar
+    - ./mvnw clean package -Pcapsule,dependent
+    - java -jar target/*-all.jar
+
+  - stage: test
     name: any
     jdk: openjdk8
     script:
-    - ./mvnw clean package -Pany
+    - ./mvnw clean package -Pany,assembly
+    - java -jar target/*-all.jar
+    - ./mvnw clean package -Pany,capsule
     - java -jar target/*-all.jar
 
   - stage: test
     name: qualifiersmore
     jdk: openjdk8
     script:
-    - ./mvnw clean package -Pqualifiersmore
+    - ./mvnw clean package -Pqualifiersmore,assembly
+    - java -jar target/*-all.jar
+    - ./mvnw clean package -Pqualifiersmore,capsule
     - java -jar target/*-all.jar
 
   - stage: test
@@ -67,36 +80,47 @@ jobs:
     name: docker-compose
     jdk: openjdk8
     script:
-    - ./mvnw clean package >/dev/null
+    - ./mvnw clean package -Passembly,interceptors >/dev/null
     - java -jar target/*-all.jar
-    - ./mvnw ; ./mvnw docker-compose:up -P docker
+    - ./mvnw -Passembly,gettingstarted ; ./mvnw docker-compose:up -P docker
+    - ./mvnw clean package -Pcapsule,any >/dev/null
+    - java -jar target/*-all.jar
+    - ./mvnw -Pcapsule,dependent ; ./mvnw docker-compose:up -P docker
 
   - stage: test
     name: getting-started
     jdk: openjdk8
     script:
-    - ./mvnw clean package -Pgetting-started
+    - ./mvnw clean package -Pgetting-started,assembly
+    - java -jar target/*-all.jar
+    - ./mvnw clean package -Pgetting-started,capsule
     - java -jar target/*-all.jar
 
   - stage: test
     name: interceptors
     jdk: openjdk8
     script:
-    - ./mvnw -Pinterceptors
+    - ./mvnw -Pinterceptors,assembly
+    - java -jar target/*-all.jar
+    - ./mvnw -Pinterceptors,capsule
     - java -jar target/*-all.jar
 
   - stage: test
     name: logs
     jdk: openjdk8
     script:
-    - ./mvnw -Plogs
+    - ./mvnw -Plogs,capsule
+    - java -jar target/*-all.jar
+    - ./mvnw -Plogs,assembly
     - java -jar target/*-all.jar
 
   - stage: test
     name: qualifiers
     jdk: openjdk8
     script:
-    - ./mvnw -Pqualifiers
+    - ./mvnw -Pqualifiers,capsule
+    - java -jar target/*-all.jar
+    - ./mvnw -Pqualifiers,assembly
     - java -jar target/*-all.jar
 
   - stage: deploy

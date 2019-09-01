@@ -12,47 +12,50 @@ package daggerok.logs.payment;
 
 import daggerok.logs.event.PaymentEvent;
 import daggerok.logs.interceptor.Logged;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+
+import static daggerok.logs.payment.PaymentBean.Type.CREDIT;
+import static daggerok.logs.payment.PaymentBean.Type.DEBIT;
 
 /**
  * Bean that fires DEBIT and CREDIT payment events selection.
  * Check server log output for event handling output.
  */
-@Data
 @Slf4j
-public class PaymentBean implements Serializable {
+@ToString
+public class PaymentBean {
 
-  private static final long serialVersionUID = 7130389273118012929L;
-  private static final int DEBIT = 1;
-  private static final int CREDIT = 2;
+  @RequiredArgsConstructor
+  public enum Type {
+    CREDIT(1), DEBIT(2);
+    @Getter public final int option;
+  }
 
   @Inject
   @Credit
-  Event<PaymentEvent> creditEvent;
+  private Event<PaymentEvent> creditEvent;
 
   @Inject
   @Debit
-  Event<PaymentEvent> debitEvent;
+  private Event<PaymentEvent> debitEvent;
 
-  private int paymentOption ;
+  private Type paymentType ;
   private BigDecimal value;
   private Date datetime;
 
   @PostConstruct
   public void init() {
-    paymentOption = System.currentTimeMillis() / 234 % 2 == 0 ? DEBIT : CREDIT;
+    paymentType = System.currentTimeMillis() / 234 % 2 == 0 ? DEBIT : CREDIT;
     value = System.currentTimeMillis() / 123 % 2 == 0 ? BigDecimal.ONE : BigDecimal.TEN;
   }
 
@@ -63,8 +66,8 @@ public class PaymentBean implements Serializable {
    */
   @Logged
   public String pay() {
-    this.setDatetime(Calendar.getInstance().getTime());
-    switch (paymentOption) {
+    datetime = Calendar.getInstance().getTime();
+    switch (paymentType) {
       case DEBIT:
         PaymentEvent debitPayload = new PaymentEvent();
         debitPayload.setPaymentType("Debit");
@@ -87,7 +90,7 @@ public class PaymentBean implements Serializable {
 
   @Logged
   public void reset() {
-    setPaymentOption(DEBIT);
-    setValue(BigDecimal.ZERO);
+    paymentType = DEBIT;
+    value = BigDecimal.ZERO;
   }
 }

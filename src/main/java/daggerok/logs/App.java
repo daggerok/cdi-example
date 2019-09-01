@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 public class App {
 
   @Inject
-  PaymentBean paymentBean;
+  private PaymentBean paymentBean;
 
   @SneakyThrows
   public void on(@Observes ContainerInitialized event) {

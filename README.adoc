@@ -46,13 +46,18 @@ public class App {
 
 - build, run abd test
 
+There are 2 options for fat jar available:
+
+- maven-assembly-plugin
+- capsule-maven-plugin
+
 [source,bash]
 ----
 # jar
-./mvnw ; java -jar target/*-all.jar
+./mvnw -Passembly ; java -jar target/*-all.jar
 
 # docker
-./mvnw ; ./mvnw docker-compose:up -P docker
+./mvnw -Pcapsule ; ./mvnw docker-compose:up -P docker
 ----
 
 //end::content[]
@@ -61,31 +66,52 @@ public class App {
 
 == maven profiles
 
+.qualifiersmore
+[source, bash]
+----
+./mvnw -Pdependent,assembly
+java -jar target/*-all.jar
+----
+
+.qualifiersmore
+[source, bash]
+----
+./mvnw -Pany,capsule
+java -jar target/*-all.jar
+----
+
+.qualifiersmore
+[source, bash]
+----
+./mvnw -Pqualifiersmore,assembly
+java -jar target/*-all.jar
+----
+
 .getting-started
 [source, bash]
 ----
-./mvnw -Pgetting-started
+./mvnw -Pgetting-started,assembly
 java -jar target/*-all.jar
 ----
 
 .interceptors
 [source, bash]
 ----
-./mvnw -Pinterceptors
+./mvnw -Pinterceptors,capsule
 java -jar target/*-all.jar
 ----
 
 .logs
 [source, bash]
 ----
-./mvnw -Plogs
+./mvnw -Plogs,capsule
 java -jar target/*-all.jar
 ----
 
 .qualifiers
 [source, bash]
 ----
-./mvnw -Pqualifiers
+./mvnw -Pqualifiers,assembly
 java -jar target/*-all.jar
 ----
 
@@ -93,7 +119,7 @@ java -jar target/*-all.jar
 [source, bash]
 ----
 ./mvnw
-./mvnw -Psimple
+./mvnw -Psimple,assembly
 java -jar target/*-all.jar
 ----
 
