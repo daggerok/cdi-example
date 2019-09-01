@@ -278,14 +278,9 @@
 
   <profiles>
     <profile>
-      <id>simple</id>
-
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
-
+      <id>alternatives</id>
       <properties>
-        <mainClass>daggerok.simple.App</mainClass>
+        <mainClass>daggerok.alternatives.App</mainClass>
       </properties>
     </profile>
 
@@ -328,6 +323,18 @@
       <id>getting-started</id>
       <properties>
         <mainClass>daggerok.gettingstarted.Config</mainClass>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>simple</id>
+
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+
+      <properties>
+        <mainClass>daggerok.simple.App</mainClass>
       </properties>
     </profile>
 

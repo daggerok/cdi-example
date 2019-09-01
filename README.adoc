@@ -69,6 +69,13 @@ There are 2 options for fat jar available:
 .qualifiersmore
 [source, bash]
 ----
+./mvnw -Pcapsule,alternatives
+java -jar target/*-all.jar
+----
+
+.qualifiersmore
+[source, bash]
+----
 ./mvnw -Pdependent,assembly
 java -jar target/*-all.jar
 ----
