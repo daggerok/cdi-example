@@ -1,64 +1,118 @@
 notifications:
   email: false
+git:
+  depth: 1
+  quiet: true
+
 env:
   global:
-    - TERM=dumb
-    - secure: GYdn2pmeMnvZM5Zwj1AYRlBsFq1cAvFG2KcdB3sman9pvx+n/o8Rt0I0wfpLpxVmjaAX/utzfDHHNjB5mP0Lf5yS4sofZ4hW+I5EOmHQ/8VUxQQCX1kgfkpwwBQRJnl3/7xevfd20PikViyjya+t/BiGCFFQGqDskhosI5dHAKU0H4ofOZObTIsmEhOYR5pYx0wfqJ2NSUtsQzAThaWwGsB+MnhmjGLSbeNul/JLLYbGQoXxpTj8jAxXvKRBXBIsTioghBFcKstybbxVzXuMJ/wrE/QD86vulF7QhNYcryjU53m1BDmF4PTKkKUM3GjMy2d/OSG7Vw+mBtof5tP5RjwSQNsS87mEep8oZYG0KVP1GMT85vJFvqtrasyXPOYWS6ZqQBPiSKdstYcPaXAM/h7zhSwkmrfrQHaUc2VM8guY8ARZmmSM/JUJYE/VUYrAYlssbn/0GwR298zzWhO/84CjhKBUL4yb4boLZRRU20hMo6Od0M0XmEa9wzeNGIUfEEVqBW9yijz3UCBMcMUgmLWHSKr1B23/LnlOl47e6CMGmUfwVYc/mFM33fdcewNiqw/sjbT6TUD3g04fmAbdOfMbmkp3Ksy1PIVzOfA3Vg/sS/ylWjRLsECDASmVCMgEETsvyqXKy6tZMFxtckX664vxksyU2MdhR4CGGuGMXeM=
+  - TERM=dumb
+  - secure: GYdn2pmeMnvZM5Zwj1AYRlBsFq1cAvFG2KcdB3sman9pvx+n/o8Rt0I0wfpLpxVmjaAX/utzfDHHNjB5mP0Lf5yS4sofZ4hW+I5EOmHQ/8VUxQQCX1kgfkpwwBQRJnl3/7xevfd20PikViyjya+t/BiGCFFQGqDskhosI5dHAKU0H4ofOZObTIsmEhOYR5pYx0wfqJ2NSUtsQzAThaWwGsB+MnhmjGLSbeNul/JLLYbGQoXxpTj8jAxXvKRBXBIsTioghBFcKstybbxVzXuMJ/wrE/QD86vulF7QhNYcryjU53m1BDmF4PTKkKUM3GjMy2d/OSG7Vw+mBtof5tP5RjwSQNsS87mEep8oZYG0KVP1GMT85vJFvqtrasyXPOYWS6ZqQBPiSKdstYcPaXAM/h7zhSwkmrfrQHaUc2VM8guY8ARZmmSM/JUJYE/VUYrAYlssbn/0GwR298zzWhO/84CjhKBUL4yb4boLZRRU20hMo6Od0M0XmEa9wzeNGIUfEEVqBW9yijz3UCBMcMUgmLWHSKr1B23/LnlOl47e6CMGmUfwVYc/mFM33fdcewNiqw/sjbT6TUD3g04fmAbdOfMbmkp3Ksy1PIVzOfA3Vg/sS/ylWjRLsECDASmVCMgEETsvyqXKy6tZMFxtckX664vxksyU2MdhR4CGGuGMXeM=
+
 language: java
 jdk: openjdk8
+
 service:
-  - docker
+- docker
+
 addons:
   apt:
+    update: true
     packages:
-      - jq
-      - bash
-      - curl
-      - sudo
-      - tree
-      - docker-ce
-      - python-pip
-      - libxml2-utils
+    - jq
+    - bash
+    - curl
+    - sudo
+    - tree
+    - docker-ce
+    - python-pip
+    - libxml2-utils
+
 install: true
 before_install:
-  - sudo pip install docker-compose httpie >/dev/null 2>&1
-  - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
-  - stop_any 80 8080 3000
-script:
-  - export root=$(pwd)
-  - ./mvnw clean package >/dev/null
-  - java -jar target/*-all.jar
-  - ./mvnw ; ./mvnw docker-compose:up -P docker
-  #
-  - ./mvnw clean package -Pgetting-started
-  - java -jar target/*-all.jar
-  #
-  - ./mvnw -Pinterceptors
-  - java -jar target/*-all.jar
-  #
-  - ./mvnw -Plogs
-  - java -jar target/*-all.jar
-  #
-  - ./mvnw -Pqualifiers
-  - java -jar target/*-all.jar
+- sudo pip install docker-compose httpie >/dev/null 2>&1
+- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+- stop_any 80 8080 3000
+
+stages:
+- test
+- deploy
+
+before_script:
+- export root=$(pwd)
+
+jobs:
+  include:
+
+  - stage: test
+    name: mvn updates
+    jdk: openjdk8
+    script: ./mvnw versions:display-property-updates
+
+  - stage: test
+    name: docker-compose
+    jdk: openjdk8
+    script:
+    - ./mvnw clean package >/dev/null
+    - java -jar target/*-all.jar
+    - ./mvnw ; ./mvnw docker-compose:up -P docker
+
+  - stage: test
+    name: getting-started
+    jdk: openjdk8
+    script:
+    - ./mvnw clean package -Pgetting-started
+    - java -jar target/*-all.jar
+
+  - stage: test
+    name: interceptors
+    jdk: openjdk8
+    script:
+    - ./mvnw -Pinterceptors
+    - java -jar target/*-all.jar
+
+  - stage: test
+    name: logs
+    jdk: openjdk8
+    script:
+    - ./mvnw -Plogs
+    - java -jar target/*-all.jar
+
+  - stage: test
+    name: qualifiers
+    jdk: openjdk8
+    script:
+    - ./mvnw -Pqualifiers
+    - java -jar target/*-all.jar
+
+  - stage: deploy
+
+    jdk: openjdk8
+    rvm: 2.6.4
+    name: GitHub release and GitHub pages deployment
+    script: skip
+    if: branch = "master" AND type NOT IN (pull_request)
+    before_deploy:
+    - if [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ ".$TRAVIS_BRANCH" != ".master" ] ; then exit 0 ; fi
+    - set -e
+    - cd ${root}
+    - ./mvnw -Pdocs
+    - mkdir -p ./target/generated-docs
+    - cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
+    deploy:
+      provider: pages
+      skip-cleanup: true
+      # travis encrypt GITHUB_TOKEN=<your github repo token> --add
+      github-token: "$GITHUB_TOKEN"
+      keep-history: true
+      on:
+        branch: master
+      local-dir: target/generated-docs
+      target_branch: gh-pages
+
 cache:
   packages: true
   directories:
-    - $HOME/.docker
-    - $HOME/.gradle
-    - $HOME/.m2
-before_deploy:
-  - cd ${root}
-  - ./mvnw -Pdocs
-  - mkdir -p ./target/generated-docs
-  - cp -Rf ./target/generated-docs/index.html ./target/generated-docs/404.html
-deploy:
-  provider: pages
-  skip-cleanup: true
-  # travis encrypt GITHUB_TOKEN=<your github repo token> --add
-  github-token: "$GITHUB_TOKEN"
-  keep-history: true
-  on:
-    branch: master
-  local-dir: target/generated-docs
-  target_branch: gh-pages
+  - $HOME/.docker
+  - $HOME/.gradle
+  - $HOME/.m2
