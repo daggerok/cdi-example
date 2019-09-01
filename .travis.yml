@@ -45,7 +45,16 @@ jobs:
   include:
 
   - stage: test
-    name: dependent
+    name: events
+    jdk: openjdk11
+    script:
+    - ./mvnw clean package -Passembly,events
+    - java -jar target/*-all.jar
+    - ./mvnw clean package -Pcapsule,events
+    - java -jar target/*-all.jar
+
+  - stage: test
+    name: weld
     jdk: openjdk11
     script:
     - ./mvnw clean package -Passembly,weld
@@ -54,7 +63,7 @@ jobs:
     - java -jar target/*-all.jar
 
   - stage: test
-    name: dependent
+    name: alternatives
     jdk: openjdk11
     script:
     - ./mvnw clean package -Passembly,alternatives
