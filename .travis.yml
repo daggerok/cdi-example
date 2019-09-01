@@ -45,6 +45,13 @@ jobs:
   include:
 
   - stage: test
+    name: any
+    jdk: openjdk8
+    script:
+    - ./mvnw clean package -Pany
+    - java -jar target/*-all.jar
+
+  - stage: test
     name: qualifiersmore
     jdk: openjdk8
     script:
