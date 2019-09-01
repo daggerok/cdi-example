@@ -44,7 +44,7 @@
     <spotbugs-maven-plugin.version>3.1.12.2</spotbugs-maven-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
     <asciidoctor-maven-plugin.version>1.5.7.1</asciidoctor-maven-plugin.version>
-    <docker-compose-maven-plugin.version>2.2.0</docker-compose-maven-plugin.version>
+    <docker-compose-maven-plugin.version>2.4.0</docker-compose-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
