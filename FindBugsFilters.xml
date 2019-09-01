@@ -3,4 +3,5 @@
 <FindBugsFilter>
     <Bug code="UPM"/>
     <Bug code="UrF"/>
+    <Class name="daggerok.conversationscoped.Messages"/>
 </FindBugsFilter>
