@@ -45,6 +45,13 @@ jobs:
   include:
 
   - stage: test
+    name: qualifiersmore
+    jdk: openjdk8
+    script:
+    - ./mvnw clean package -Pqualifiersmore
+    - java -jar target/*-all.jar
+
+  - stage: test
     name: mvn updates
     jdk: openjdk8
     script: ./mvnw versions:display-property-updates
