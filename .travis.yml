@@ -48,6 +48,15 @@ jobs:
     name: dependent
     jdk: openjdk11
     script:
+    - ./mvnw clean package -Passembly,weld
+    - java -jar target/*-all.jar
+    - ./mvnw clean package -Pcapsule,weld
+    - java -jar target/*-all.jar
+
+  - stage: test
+    name: dependent
+    jdk: openjdk11
+    script:
     - ./mvnw clean package -Passembly,alternatives
     - java -jar target/*-all.jar
     - ./mvnw clean package -Pcapsule,alternatives

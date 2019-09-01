@@ -278,6 +278,13 @@
 
   <profiles>
     <profile>
+      <id>weld</id>
+      <properties>
+        <mainClass>daggerok.weld.App</mainClass>
+      </properties>
+    </profile>
+
+    <profile>
       <id>alternatives</id>
       <properties>
         <mainClass>daggerok.alternatives.App</mainClass>
