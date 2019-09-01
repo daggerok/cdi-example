@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>cdi-example (0.0.1)</title>
-<date>2019-09-01 07:11:16 UTC</date>
+<date>2019-09-01 15:55:43 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,7 +15,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.1</revnumber>
-<date>2019-09-01 07:11:16 UTC</date>
+<date>2019-09-01 15:55:43 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -64,11 +64,20 @@
 <simpara>build, run abd test</simpara>
 </listitem>
 </itemizedlist>
+<simpara>There are 2 options for fat jar available:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>maven-assembly-plugin</simpara>
+</listitem>
+<listitem>
+<simpara>capsule-maven-plugin</simpara>
+</listitem>
+</itemizedlist>
 <programlisting language="bash" linenumbering="unnumbered"># jar
-./mvnw ; java -jar target/*-all.jar
+./mvnw -Passembly ; java -jar target/*-all.jar
 
 # docker
-./mvnw ; ./mvnw docker-compose:up -P docker</programlisting>
+./mvnw -Pcapsule ; ./mvnw docker-compose:up -P docker</programlisting>
 </chapter>
 <chapter xml:id="other">
 <title>Other</title>
@@ -77,30 +86,51 @@
 <chapter xml:id="maven-profiles">
 <title>maven profiles</title>
 <formalpara>
+<title>qualifiersmore</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pdependent,assembly
+java -jar target/*-all.jar</programlisting>
+</para>
+</formalpara>
+<formalpara>
+<title>qualifiersmore</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pany,capsule
+java -jar target/*-all.jar</programlisting>
+</para>
+</formalpara>
+<formalpara>
+<title>qualifiersmore</title>
+<para>
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pqualifiersmore,assembly
+java -jar target/*-all.jar</programlisting>
+</para>
+</formalpara>
+<formalpara>
 <title>getting-started</title>
 <para>
-<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pgetting-started
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pgetting-started,assembly
 java -jar target/*-all.jar</programlisting>
 </para>
 </formalpara>
 <formalpara>
 <title>interceptors</title>
 <para>
-<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pinterceptors
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pinterceptors,capsule
 java -jar target/*-all.jar</programlisting>
 </para>
 </formalpara>
 <formalpara>
 <title>logs</title>
 <para>
-<programlisting language="bash" linenumbering="unnumbered">./mvnw -Plogs
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Plogs,capsule
 java -jar target/*-all.jar</programlisting>
 </para>
 </formalpara>
 <formalpara>
 <title>qualifiers</title>
 <para>
-<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pqualifiers
+<programlisting language="bash" linenumbering="unnumbered">./mvnw -Pqualifiers,assembly
 java -jar target/*-all.jar</programlisting>
 </para>
 </formalpara>
@@ -108,7 +138,7 @@ java -jar target/*-all.jar</programlisting>
 <title>default (simple)</title>
 <para>
 <programlisting language="bash" linenumbering="unnumbered">./mvnw
-./mvnw -Psimple
+./mvnw -Psimple,assembly
 java -jar target/*-all.jar</programlisting>
 </para>
 </formalpara>
