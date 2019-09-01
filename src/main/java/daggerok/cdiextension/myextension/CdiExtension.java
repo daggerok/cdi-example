@@ -1,4 +1,4 @@
-package daggerok.cdiextension.my;
+package daggerok.cdiextension.myextension;
 
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.spi.AfterBeanDiscovery;
