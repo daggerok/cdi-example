@@ -136,6 +136,7 @@ java -jar target/*-all.jar
 
 links:
 
+- youtube.com/watch?v=LYKMaj4XKvg
 - https://docs.jboss.org/weld/reference/latest/en-US/html/environments.html#_bootstrapping_cdi_se
 - https://docs.jboss.org/weld/reference/latest/en-US/html/environments.html
 - link:https://docs.jboss.org/weld/reference/latest/en-US/html_single/[Weld CDI reference]
