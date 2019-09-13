@@ -3,7 +3,7 @@
 <book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
 <info>
 <title>cdi-example (0.0.1)</title>
-<date>2019-09-01 22:38:09 UTC</date>
+<date>2019-09-13 01:50:39 UTC</date>
 <author>
 <personname>
 <firstname>Maksim</firstname>
@@ -15,7 +15,7 @@
 <revhistory>
 <revision>
 <revnumber>0.0.1</revnumber>
-<date>2019-09-01 22:38:09 UTC</date>
+<date>2019-09-13 01:50:39 UTC</date>
 <authorinitials>MK</authorinitials>
 </revision>
 </revhistory>
@@ -171,6 +171,9 @@ java -jar target/*-all.jar</programlisting>
 </listitem>
 <listitem>
 <simpara><link xl:href="https://docs.jboss.org/weld/reference/latest/en-US/html/interceptors.html">JBoss weld reference</link></simpara>
+</listitem>
+<listitem>
+<simpara><link xl:href="https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#default_bean_discovery">docs.jboss.org/cdi/spec/2.0/cdi-spec.html#default_bean_discovery</link></simpara>
 </listitem>
 </itemizedlist>
 <simpara>TODO:</simpara>
