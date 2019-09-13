@@ -142,6 +142,7 @@ links:
 - link:https://docs.jboss.org/weld/reference/latest/en-US/html_single/[Weld CDI reference]
 - link:https://eclipse-ee4j.github.io/jakartaee-tutorial/toc.html[Learn more from JakartaEE tutorials]
 - link:https://docs.jboss.org/weld/reference/latest/en-US/html/interceptors.html[JBoss weld reference]
+- https://docs.jboss.org/cdi/spec/2.0/cdi-spec.html#default_bean_discovery
 
 TODO:
 
