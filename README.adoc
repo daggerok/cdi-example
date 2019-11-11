@@ -134,6 +134,10 @@ java -jar target/*-all.jar
 
 //tag::links[]
 
+other repositories:
+
+- link:https://github.com/daggerok/vertx-cdi-view[GitHub: daggerok/vertx-cdi-view]
+
 links:
 
 - youtube.com/watch?v=LYKMaj4XKvg
